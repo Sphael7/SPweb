@@ -1,1105 +1,610 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sains dan Perpustakaan – SMAN 8 Jakarta</title>
-    <!-- Tailwind CSS -->
+    <title>Sains & Perpustakaan - Ekstrakurikuler</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Inter Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Swiper.js CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-    <!-- AOS (Animate On Scroll) CSS -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <!-- FullCalendar CSS -->
-    <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css' rel='stylesheet' />
-    <!-- Font Awesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
-
+    <!-- Google Font: Inter -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap">
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            overflow-x: hidden;
-            background-color: #0d0d1a; /* Dark background */
-            color: #e0e0f0;
-            line-height: 1.6;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+            background-color: #3498db; /* Match the hero section's top gradient color to prevent white flash */
         }
 
-        /* Ensure strong tags are bold */
-        strong {
-            font-weight: 700; /* Ensure it's bold */
-            color: #ffffff; /* Make bold text stand out slightly */
+        /* --- STYLES FOR PAGE 1 --- */
+        .hero-bg-gradient {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom,
+                #3498db 0%, #2980b9 40%, #2c3e50 70%, #1a2b3c 100%);
+            z-index: -2;
         }
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #1a1a2e;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #2563eb; /* Blue */
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #3b82f6;
-        }
-
-        .section {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 8rem 1rem; /* Increased padding for more space */
-            position: relative;
-            z-index: 1;
-            background-color: transparent;
-            /* Added smooth transition for background changes, if any */
-            transition: background-color 0.5s ease-in-out;
-        }
-
-        /* Hero Section Specific Style */
-        #homepage {
-            background-image: linear-gradient(rgba(13, 13, 26, 0.85), rgba(13, 13, 26, 0.85)), url('https://placehold.co/1920x1080/0d0d1a/e0e0f0?text=Siswa+Belajar'); /* Placeholder image */
+        .illustrative-elements {
+            background-image: url('theme-1/theme-1.png');
             background-size: cover;
-            background-position: center;
-            color: white;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.4);
-            justify-content: center; /* Center content vertically */
-            align-items: center; /* Center content horizontally */
-            text-align: center;
-            min-height: 100vh; /* Ensure it takes full viewport height */
-            padding-top: 0; /* Remove top padding for full height hero */
-            padding-bottom: 0; /* Remove bottom padding for full height hero */
-        }
-
-        /* CTA Button Hover Effect */
-        .cta-button {
-            transition: all 0.3s ease-in-out;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-        }
-
-        /* Glassmorphism Effect */
-        .glassmorphism {
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(12px); /* Increased blur */
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.18); /* Slightly more prominent border */
-            border-radius: 1.5rem; /* Rounded corners */
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.25); /* Stronger shadow */
-            transition: all 0.3s ease-in-out; /* Add transition for hover effects */
-        }
-
-        /* Card Hover Effect for Highlights & Leaders */
-        .glassmorphism.card-hover:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
-            border-color: rgba(167, 139, 250, 0.5); /* Light indigo border on hover */
-        }
-
-        /* Card Flip Effect (retained for projects) */
-        .flip-card {
-            background-color: transparent;
-            perspective: 1000px;
-            width: 100%;
-            height: 100%;
-        }
-
-        .flip-card-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            text-align: center;
-            transition: transform 0.6s;
-            transform-style: preserve-3d;
-            border-radius: 1.5rem;
-        }
-
-        .flip-card:hover .flip-card-inner {
-            transform: rotateY(180deg);
-        }
-
-        .flip-card-front, .flip-card-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 1.5rem;
-            border-radius: 1.5rem;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2); /* Add shadow to individual faces */
-        }
-
-        .flip-card-front {
-            background: rgba(59, 130, 246, 0.2); /* Blue tint */
-            color: #e0e0f0;
-        }
-
-        .flip-card-back {
-            background: rgba(16, 185, 129, 0.2); /* Green tint */
-            color: #e0e0f0;
-            transform: rotateY(180deg);
-        }
-
-        /* Modal Styles */
-        .modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.8); /* Darker overlay */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.4s ease-out, visibility 0.4s ease-out; /* Smoother transition */
-        }
-
-        .modal.open {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .modal-content {
-            position: relative;
-            max-width: 90%;
-            max-height: 90%;
-            padding: 2.5rem; /* Increased padding */
-            border-radius: 1.5rem;
-            color: #e0e0f0;
-            overflow-y: auto;
-            animation: modal-fade-in 0.4s ease-out; /* Adjusted animation duration */
-        }
-
-        @keyframes modal-fade-in {
-            from { transform: translateY(-30px); opacity: 0; } /* Larger initial offset */
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        .close-button {
-            position: absolute;
-            top: 1.25rem; /* Adjusted position */
-            right: 1.25rem; /* Adjusted position */
-            background: none;
-            border: none;
-            font-size: 2.25rem; /* Slightly larger */
-            color: #e0e0f0;
-            cursor: pointer;
-            transition: color 0.3s, transform 0.2s;
-        }
-
-        .close-button:hover {
-            color: #ef4444; /* Red-400 */
-            transform: rotate(90deg); /* Rotate on hover */
-        }
-
-        /* Navigation Map (fixed at top) */
-        .nav-map {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 500;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 1.5rem;
-            padding: 0.75rem 2rem; /* Reduced vertical padding slightly */
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-            background: rgba(13, 13, 26, 0.95); /* More opaque */
-            backdrop-filter: blur(10px); /* Slightly more blur */
-            -webkit-backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.15); /* Stronger border */
-            transition: transform 0.3s ease-in-out;
-        }
-        .nav-map.hidden {
-            transform: translateY(-100%);
-        }
-
-        .nav-map-button {
-            background: transparent;
-            color: #e0e0f0;
-            padding: 0.5rem 1rem;
-            border-radius: 0.75rem;
-            cursor: pointer;
-            transition: background 0.3s, color 0.3s, transform 0.2s;
-            font-weight: 500;
-            text-decoration: none; /* Make it look like a link */
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .nav-map-button:hover {
-            background: rgba(255, 255, 255, 0.12); /* Slightly more visible hover */
-            color: #a78bfa; /* Light indigo for hover */
-            transform: translateY(-2px);
-        }
-
-        /* Responsive Adjustments */
-        @media (max-width: 768px) {
-            .section {
-                padding: 5rem 1rem; /* Adjusted padding for mobile */
-            }
-            .nav-map {
-                flex-wrap: wrap;
-                gap: 0.75rem;
-                padding: 0.75rem 1rem;
-            }
-            .nav-map-button {
-                padding: 0.4rem 0.8rem;
-                font-size: 0.8rem;
-            }
-            #homepage h1 {
-                font-size: 3rem;
-            }
-            #homepage p {
-                font-size: 1.2rem;
-            }
-            .modal-content {
-                padding: 1.5rem;
-            }
-        }
-
-        /* Custom FullCalendar Styles */
-        #calendar .fc-toolbar-title {
-            color: #e0e0f0 !important;
-        }
-        #calendar .fc-daygrid-day-number {
-            color: #a0a0b0;
-        }
-        #calendar .fc-col-header-cell-cushion {
-            color: #e0e0f0;
-        }
-        #calendar .fc-daygrid-day.fc-day-today {
-            background-color: rgba(59, 130, 246, 0.1) !important; /* Blue tint for today */
-            border-radius: 0.5rem;
-        }
-        #calendar .fc-event {
-            background-color: #2563eb; /* Blue */
-            border-color: #2563eb;
-            font-size: 0.85rem;
-            padding: 0.3rem 0.5rem;
-            border-radius: 0.5rem;
-            transition: background-color 0.2s;
-        }
-        #calendar .fc-event:hover {
-            background-color: #3b82f6;
-        }
-        .fc-event-popover {
-            background: rgba(16, 185, 129, 0.2); /* Green tint for popover */
-            border: 1px solid rgba(16, 185, 129, 0.4);
-            color: #e0e0f0;
-            border-radius: 0.75rem; /* Rounded corners for popover */
-            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
-            z-index: 101; /* Above other elements but below modal */
-        }
-        .fc .fc-button-primary {
-            background-color: #2563eb !important; /* Blue */
-            border-color: #2563eb !important;
-        }
-        .fc .fc-button-primary:hover {
-            background-color: #3b82f6 !important;
-            border-color: #3b82f6 !important;
-        }
-
-        /* Wavy Section Separators */
-        .section-wave-bottom {
-            position: relative;
-            padding-bottom: 120px; /* Space for the wave */
-        }
-        .section-wave-bottom::after {
-            content: '';
+            background-position: center bottom;
             position: absolute;
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 120px; /* Height of the wave */
-            background-color: inherit; /* Inherit background from the section */
-            /* Using a smooth, repeating wave pattern with clip-path */
-            clip-path: ellipse(100% 60% at 50% 100%); /* Adjust 60% for wave intensity */
-            -webkit-clip-path: ellipse(100% 60% at 50% 100%);
-            transform: translateY(50%); /* Half of the wave overlaps next section */
+            height: 100%;
+            z-index: -1;
+        }
+
+        .text-outline-shadow {
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
+        }
+
+        /* NEW: Blue overlay for hero background image */
+        .blue-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 50, 200, 0.4); /* Dark blue tint */
+            mix-blend-mode: hue; /* Blends the color with the image */
+            z-index: -1;
+        }
+
+        /* --- STYLES FOR PAGE 2 --- */
+        .page2-illustrative-elements {
+            background-image: url('theme-2/theme-2.png');
+            background-size: cover;
+            background-position: center bottom;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        /* Particle container */
+        .particle-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             z-index: 0;
+            overflow: hidden;
+            pointer-events: none;
         }
 
-        /* Specific wave colors based on next section's background */
-        #divisi-eksakta.section-wave-bottom::after {
-            background-color: #0d0d1a; /* Wave into homepage/default background */
-        }
-        #divisi-sosial.section-wave-bottom::after {
-            background-color: #1a1a2e; /* Wave into darker background */
-        }
-        #divisi-teknologi.section-wave-bottom::after {
-            background-color: #0d0d1a; /* Wave into lighter background */
-        }
-        #program-kegiatan.section-wave-bottom::after {
-            background-color: #0d0d1a; /* Wave into lighter background */
-        }
-        #proyek.section-wave-bottom::after {
-            background-color: #1a1a2e; /* Wave into darker background */
+        /* Particle styles */
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            animation: particle-fly 15s infinite linear;
         }
 
-        /* Adjust section padding where wave is applied */
-        #divisi-eksakta, #divisi-sosial, #divisi-teknologi, #program-kegiatan, #proyek {
-            padding-bottom: 6rem; /* Adjust for wave overlay */
+        /* Particle animation */
+        @keyframes particle-fly {
+            0% {
+                transform: translate(0, 0) scale(1) rotate(0deg);
+                opacity: 0;
+            }
+            20% {
+                opacity: 1;
+            }
+            100% {
+                transform: translate(calc(100vw + 50px), calc(-100vh - 50px)) scale(0) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        /* Card with fade-in and slide-up animation when it appears on screen */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(4rem);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+        .animate-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .animate-on-scroll:nth-child(1) { transition-delay: 0.2s; }
+        .animate-on-scroll:nth-child(2) { transition-delay: 0.4s; }
+        .animate-on-scroll:nth-child(3) { transition-delay: 0.6s; }
+        .animate-on-scroll:nth-child(4) { transition-delay: 0.8s; }
+        .animate-on-scroll:nth-child(5) { transition-delay: 1.0s; }
+        .animate-on-scroll:nth-child(6) { transition-delay: 1.2s; }
+
+        /* --- NEW: LETTER ANIMATION STYLES --- */
+        .animasi-huruf span {
+            display: inline-block;
+            transition: transform 0.3s ease-in-out, text-shadow 0.3s ease-in-out;
+            transform-origin: bottom;
+        }
+        .animasi-huruf span:hover {
+            transform: translateY(-5px) rotate(5deg);
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+        }
+
+        /* --- NEW: MODAL STYLES --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            pointer-events: none; /* Make overlay non-clickable by default */
+            visibility: hidden; /* Hide overlay initially */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            opacity: 0;
+            transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+        }
+
+        .modal-overlay.is-active {
+            pointer-events: auto; /* Enable clicks when active */
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* New modal styling for blur and animated border */
+        .program-modal {
+            background-color: transparent;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            padding: 2rem;
+            border-radius: 1.5rem;
+            max-width: 90%;
+            width: 700px;
+            position: relative;
+            transform: scale(0.8); /* Adjusted for perfect centering */
+            opacity: 0;
+            transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+            overflow: hidden;
+            animation: floating 3s ease-in-out infinite; /* Added a continuous floating effect */
+        }
+        
+        .program-modal:hover {
+            animation-duration: 2s; /* Speed up the floating effect on hover */
+            box-shadow: 0 0 20px rgba(0, 150, 255, 0.7); /* Subtle glowing effect */
+            border-color: rgba(0, 150, 255, 0.5);
+            transition: box-shadow 0.5s ease-in-out;
+        }
+
+        @keyframes floating {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+        
+        .modal-overlay.is-active .program-modal {
+            transform: scale(1);
+            opacity: 1;
+            animation: floating 3s ease-in-out infinite;
         }
     </style>
 </head>
-<body>
-    <!-- Navigation Map (fixed at top) -->
-    <nav id="nav-map" class="nav-map">
-        <a class="nav-map-button" href="#homepage"><i class="fas fa-home"></i> Beranda</a>
-        <a class="nav-map-button" href="#tentang-kami"><i class="fas fa-info-circle"></i> Tentang Kami</a>
-        <a class="nav-map-button" href="#divisi-section"><i class="fas fa-sitemap"></i> Divisi</a>
-        <a class="nav-map-button" href="#kepemimpinan"><i class="fas fa-users-cog"></i> Pimpinan</a>
-        <a class="nav-map-button" href="#program-kegiatan"><i class="fas fa-calendar-alt"></i> Kegiatan</a>
-        <a class="nav-map-button" href="#proyek"><i class="fas fa-lightbulb"></i> Proyek</a>
-        <a class="nav-map-button" href="#kontak-join"><i class="fas fa-envelope"></i> Kontak & Join</a>
-    </nav>
+<body class="min-h-screen flex flex-col relative">
 
-    <!-- 1. Beranda (Homepage) -->
-    <section id="homepage" class="section text-white flex items-center justify-center">
-        <div class="max-w-4xl mx-auto text-center py-24" data-aos="fade-up"> <!-- Added py-24 for internal spacing -->
-            <h1 class="text-6xl md:text-7xl font-extrabold mb-4 leading-tight">
-                Sains dan Perpustakaan – SMAN 8 Jakarta
-            </h1>
-            <p class="text-2xl md:text-3xl font-light mb-8 opacity-90">
-                Eksplorasi Ilmu, Inspirasi, dan Teknologi dalam satu wadah
-            </p>
-            <a href="#tentang-kami" class="inline-block bg-gradient-to-r from-blue-600 to-green-500 hover:from-blue-700 hover:to-green-600 text-white font-bold py-3 px-8 rounded-full shadow-lg transform hover:scale-105 transition-all duration-300 cta-button">
-                Kenali Kami <i class="fas fa-arrow-right ml-2"></i>
-            </a>
-        </div>
-    </section>
+    <!-- =================== PAGE 1 =================== -->
+    <div id="page1" class="min-h-screen flex flex-col relative">
+        <div class="hero-bg-gradient"></div>
+        <div class="illustrative-elements"></div>
+        <!-- Dark overlay to make the page 1 background 15% darker -->
+        <div class="absolute inset-0 bg-black opacity-5"></div>
+        <!-- NEW: Blue tint overlay for the image -->
+        <div class="absolute inset-0 bg-blue-900 opacity-20 mix-blend-color"></div>
 
-    <!-- Homepage Highlight (Cards) -->
-    <section class="section pt-0 pb-24 bg-[#0d0d1a]">
-        <div class="max-w-6xl mx-auto text-center px-4">
-            <h2 class="text-4xl font-bold mb-12 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600" data-aos="fade-up">Jelajahi Divisi Kami</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8"> <!-- Removed px-4 from this div as it's already on parent -->
-                <div class="glassmorphism p-8 rounded-2xl flex flex-col items-center text-center group transform card-hover" data-aos="fade-up" data-aos-delay="100">
-                    <div class="text-5xl mb-4 text-blue-400 group-hover:text-blue-300 transition-colors"><i class="fas fa-flask"></i></div>
-                    <h3 class="text-2xl font-semibold mb-3 text-white">Eksakta</h3>
-                    <p class="text-gray-300 mb-6">Mempelajari dunia sains, matematika, dan penelitian alam.</p>
-                    <a href="#divisi-eksakta" class="text-blue-400 hover:text-blue-300 font-medium">Selengkapnya <i class="fas fa-chevron-right text-sm ml-1"></i></a>
-                </div>
-                <div class="glassmorphism p-8 rounded-2xl flex flex-col items-center text-center group transform card-hover" data-aos="fade-up" data-aos-delay="200">
-                    <div class="text-5xl mb-4 text-green-400 group-hover:text-green-300 transition-colors"><i class="fas fa-book-open"></i></div>
-                    <h3 class="text-2xl font-semibold mb-3 text-white">Sosial Humaniora</h3>
-                    <p class="text-gray-300 mb-6">Mendalami literasi, sejarah, sosiologi, dan kajian budaya.</p>
-                    <a href="#divisi-sosial" class="text-green-400 hover:text-green-300 font-medium">Selengkapnya <i class="fas fa-chevron-right text-sm ml-1"></i></a>
-                </div>
-                <div class="glassmorphism p-8 rounded-2xl flex flex-col items-center text-center group transform card-hover" data-aos="fade-up" data-aos-delay="300">
-                    <div class="text-5xl mb-4 text-purple-400 group-hover:text-purple-300 transition-colors"><i class="fas fa-cogs"></i></div>
-                    <h3 class="text-2xl font-semibold mb-3 text-white">Teknologi</h3>
-                    <p class="text-gray-300 mb-6">Berinovasi di bidang pemrograman, robotika, dan multimedia.</p>
-                    <a href="#divisi-teknologi" class="text-purple-400 hover:text-purple-300 font-medium">Selengkapnya <i class="fas fa-chevron-right text-sm ml-1"></i></a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 2. Tentang Kami -->
-    <section id="tentang-kami" class="section">
-        <div class="glassmorphism p-8 md:p-12 max-w-5xl w-full mx-auto rounded-3xl text-center" data-aos="fade-up">
-            <h2 class="text-4xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-cyan-500">Tentang Sains dan Perpustakaan</h2>
-            <div class="text-lg text-gray-200 leading-relaxed text-justify">
-                <p class="mb-4">
-                    <strong>Sains dan Perpustakaan (SP)</strong> SMAN 8 Jakarta adalah ekstrakurikuler yang mewadahi minat dan bakat siswa dalam eksplorasi ilmu pengetahuan, literasi, dan teknologi. Kami percaya bahwa pengetahuan adalah kunci untuk masa depan, dan melalui kegiatan-kegiatan kami, siswa dapat mengasah keterampilan berpikir kritis, berinovasi, dan berkontribusi nyata.
+        <div class="relative z-10 flex flex-col flex-grow items-start justify-start p-4 md:p-8 text-white">
+            <header class="w-full max-w-7xl flex justify-end items-center py-4 px-6 md:px-0">
+                <nav class="flex text-base font-semibold space-x-6 ml-auto">
+                    <a href="#page2" class="nav-link hover:text-yellow-300 transition duration-300">Activities</a>
+                    <a href="#page2" class="nav-link hover:text-yellow-300 transition duration-300">Programs</a>
+                    <a href="#page2" class="nav-link hover:text-yellow-300 transition duration-300">About Us</a>
+                    <a href="#page2" class="nav-link hover:text-yellow-300 transition duration-300">Contact</a>
+                </nav>
+            </header>
+            <main class="flex flex-col items-start justify-center flex-grow pl-4 md:pl-16 mt-20 md:mt-32">
+                <h1 class="text-5xl md:text-7xl font-black tracking-tighter mb-4 uppercase text-white text-outline-shadow leading-tight animasi-huruf">
+                    SAINS &<br>PERPUSTAKAAN
+                </h1>
+                <p class="text-base md:text-lg font-normal mb-8 max-w-xl text-white drop-shadow-md">
+                    Join us on the Sains & Perpustakaan Extracurricular adventure,<br>
+                    the students’ go-to for achievement and their future.<br>
+                    An epic adventure awaits you.
                 </p>
-                <h3 class="text-2xl font-semibold mb-4 text-blue-300 text-center">Sejarah Singkat</h3>
-                <p class="mb-4">
-                    Didirikan pada tahun 2010, SP bermula dari inisiatif sekelompok siswa yang memiliki semangat tinggi terhadap sains dan pentingnya literasi. Seiring waktu, kami berkembang pesat, menambahkan fokus pada teknologi, dan menjadi salah satu ekstrakurikuler paling dinamis di SMAN 8 Jakarta.
-                </p>
-                <h3 class="text-2xl font-semibold mb-4 text-green-300 text-center">Visi & Misi</h3>
-                <p class="mb-2">
-                    <strong>Visi:</strong> Menjadi pusat pengembangan potensi siswa dalam bidang sains, literasi, dan teknologi yang adaptif terhadap tantangan zaman.
-                </p>
-                <p class="mb-4">
-                    <strong>Misi:</strong>
-                    <ul class="list-disc list-inside ml-4 mt-2">
-                        <li>Mendorong riset dan eksperimen ilmiah.</li>
-                        <li>Meningkatkan budaya literasi dan analisis kritis.</li>
-                        <li>Mengembangkan keterampilan di bidang teknologi dan inovasi.</li>
-                        <li>Membentuk generasi yang berwawasan luas dan berdaya saing global.</li>
-                    </ul>
-                </p>
-                <h3 class="text-2xl font-semibold mb-4 text-purple-300 text-center">Nilai-Nilai Kami</h3>
-                <div class="flex flex-wrap justify-center gap-4 mt-4">
-                    <span class="bg-blue-700 text-white px-4 py-2 rounded-full text-sm">Riset</span>
-                    <span class="bg-green-700 text-white px-4 py-2 rounded-full text-sm">Literasi</span>
-                    <span class="bg-purple-700 text-white px-4 py-2 rounded-full text-sm">Inovasi</span>
-                    <span class="bg-yellow-700 text-white px-4 py-2 rounded-full text-sm">Kolaborasi</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 3. Divisi Section Header -->
-    <section id="divisi-section" class="section pt-24 pb-12">
-        <h2 class="text-5xl font-extrabold mb-12 text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-yellow-500" data-aos="fade-up">Divisi Kami</h2>
-    </section>
-
-    <!-- Divisi Eksakta -->
-    <section id="divisi-eksakta" class="section pt-12 pb-24 bg-[#1a1a2e] section-wave-bottom">
-        <div class="glassmorphism p-8 md:p-12 max-w-6xl w-full mx-auto rounded-3xl grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-            <div data-aos="fade-right">
-                <img src="https://placehold.co/600x400/10b981/ffffff?text=Eksakta+Lab" alt="Eksakta Lab" class="rounded-2xl shadow-xl w-full h-auto object-cover">
-            </div>
-            <div data-aos="fade-left">
-                <h3 class="text-4xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-500">Divisi Eksakta</h3>
-                <p class="text-lg text-gray-200 mb-6 leading-relaxed">
-                    Divisi Eksakta adalah rumah bagi para pemikir logis dan eksperimentalis. Kami mendalami berbagai cabang sains seperti <strong>matematika, kimia, fisika, dan biologi</strong> melalui riset, praktik lab, dan proyek-proyek inovatif. Tujuan kami adalah mengembangkan pemahaman mendalam tentang alam semesta dan aplikasi praktisnya.
-                </p>
-                <a href="#proyek" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-full transition-colors cta-button">
-                    Lihat Proyek Eksakta <i class="fas fa-arrow-right ml-2"></i>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Divisi Sosial Humaniora -->
-    <section id="divisi-sosial" class="section pt-24 pb-32 bg-[#0d0d1a] section-wave-bottom">
-        <div class="glassmorphism p-8 md:p-12 max-w-6xl w-full mx-auto rounded-3xl grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-            <div class="md:order-2" data-aos="fade-left">
-                <img src="https://placehold.co/600x400/8b5cf6/ffffff?text=Perpustakaan+Modern" alt="Perpustakaan Modern" class="rounded-2xl shadow-xl w-full h-auto object-cover">
-            </div>
-            <div class="md:order-1" data-aos="fade-right">
-                <h3 class="text-4xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-500">Divisi Sosial Humaniora</h3>
-                <p class="text-lg text-gray-200 mb-6 leading-relaxed">
-                    Di Divisi Sosial Humaniora, kami mengasah kepekaan terhadap isu-isu sosial, budaya, dan sejarah. Melalui <strong>diskusi kritis, riset sosial, penulisan esai, dan kajian literatur</strong>, kami bertujuan untuk menumbuhkan pemahaman yang komprehensif tentang manusia dan masyarakat, serta kemampuan untuk mengkomunikasikan ide secara efektif.
-                </p>
-                <a href="#proyek" class="inline-block bg-pink-600 hover:bg-pink-700 text-white font-bold py-2 px-6 rounded-full transition-colors cta-button">
-                    Lihat Proyek Sosial <i class="fas fa-arrow-right ml-2"></i>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Divisi Teknologi -->
-    <section id="divisi-teknologi" class="section pt-24 pb-32 bg-[#1a1a2e] section-wave-bottom">
-        <div class="glassmorphism p-8 md:p-12 max-w-6xl w-full mx-auto rounded-3xl grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-            <div data-aos="fade-right">
-                <img src="https://placehold.co/600x400/3b82f6/ffffff?text=Coding+Robotika" alt="Coding and Robotics" class="rounded-2xl shadow-xl w-full h-auto object-cover">
-            </div>
-            <div data-aos="fade-left">
-                <h3 class="text-4xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-500">Divisi Teknologi</h3>
-                <p class="text-lg text-gray-200 mb-6 leading-relaxed">
-                    Divisi Teknologi adalah laboratorium inovasi kami. Kami menjelajahi dunia <strong>pemrograman, robotika, pengembangan aplikasi, dan multimedia</strong>. Dari menciptakan website hingga merakit robot, kami mendorong siswa untuk mengubah ide-ide menjadi solusi nyata melalui penerapan teknologi terkini.
-                </p>
-                <a href="#proyek" class="inline-block bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-6 rounded-full transition-colors cta-button">
-                    Lihat Proyek Teknologi <i class="fas fa-arrow-right ml-2"></i>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- 4. Struktur Kepemimpinan -->
-    <section id="kepemimpinan" class="section bg-[#0d0d1a]">
-        <div class="glassmorphism p-8 md:p-12 max-w-5xl w-full mx-auto text-center rounded-3xl" data-aos="fade-up">
-            <h2 class="text-4xl font-bold mb-12 text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-500">Struktur Kepemimpinan</h2>
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-                <!-- Example Leader Card -->
-                <div class="glassmorphism p-4 rounded-xl flex flex-col items-center cursor-pointer transform card-hover" data-member-id="ketua-umum">
-                    <img src="https://placehold.co/120x120/a78bfa/ffffff?text=Ketua" alt="Foto Ketua Umum" class="w-24 h-24 rounded-full mb-3 object-cover border-2 border-blue-400">
-                    <h4 class="text-lg font-semibold text-white">Budi Santoso</h4>
-                    <p class="text-sm text-gray-400">Ketua Umum</p>
-                </div>
-                <div class="glassmorphism p-4 rounded-xl flex flex-col items-center cursor-pointer transform card-hover" data-member-id="wakil-ketua">
-                    <img src="https://placehold.co/120x120/9ca3af/ffffff?text=Wakil" alt="Foto Wakil Ketua" class="w-24 h-24 rounded-full mb-3 object-cover border-2 border-green-400">
-                    <h4 class="text-lg font-semibold text-white">Dewi Lestari</h4>
-                    <p class="text-sm text-gray-400">Wakil Ketua</p>
-                </div>
-                <div class="glassmorphism p-4 rounded-xl flex flex-col items-center cursor-pointer transform card-hover" data-member-id="kadiv-eksakta">
-                    <img src="https://placehold.co/120x120/60a5fa/ffffff?text=Eksakta" alt="Foto Kadiv Eksakta" class="w-24 h-24 rounded-full mb-3 object-cover border-2 border-blue-400">
-                    <h4 class="text-lg font-semibold text-white">Rina Cahaya</h4>
-                    <p class="text-sm text-gray-400">Kepala Divisi Eksakta</p>
-                </div>
-                <div class="glassmorphism p-4 rounded-xl flex flex-col items-center cursor-pointer transform card-hover" data-member-id="kadiv-sosial">
-                    <img src="https://placehold.co/120x120/f472b6/ffffff?text=Sosial" alt="Foto Kadiv Sosial" class="w-24 h-24 rounded-full mb-3 object-cover border-2 border-pink-400">
-                    <h4 class="text-lg font-semibold text-white">Adi Wicaksono</h4>
-                    <p class="text-sm text-gray-400">Kepala Divisi Sosial</p>
-                </div>
-                <div class="glassmorphism p-4 rounded-xl flex flex-col items-center cursor-pointer transform card-hover" data-member-id="kadiv-teknologi">
-                    <img src="https://placehold.co/120x120/a855f7/ffffff?text=Tekno" alt="Foto Kadiv Teknologi" class="w-24 h-24 rounded-full mb-3 object-cover border-2 border-purple-400">
-                    <h4 class="text-lg font-semibold text-white">Siska Putri</h4>
-                    <p class="text-sm text-gray-400">Kepala Divisi Teknologi</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 5. Program & Kegiatan -->
-    <section id="program-kegiatan" class="section bg-[#1a1a2e] section-wave-bottom">
-        <div class="glassmorphism p-8 md:p-12 max-w-6xl w-full mx-auto rounded-3xl text-center" data-aos="fade-up">
-            <h2 class="text-4xl font-bold mb-12 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-green-500">Program & Kegiatan Kami</h2>
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-                <!-- Kegiatan Rutin -->
-                <div class="glassmorphism p-6 rounded-2xl text-left card-hover" data-aos="fade-up" data-aos-delay="100">
-                    <h3 class="text-3xl font-bold mb-4 text-blue-300"><i class="fas fa-redo-alt mr-2"></i> Rutin</h3>
-                    <p class="text-gray-200 mb-4">
-                        Kegiatan yang dilaksanakan secara berkala untuk menjaga konsistensi pembelajaran dan eksplorasi.
-                    </p>
-                    <ul class="list-disc list-inside text-gray-300 space-y-2 ml-4">
-                        <li>Diskusi Ilmu Mingguan (Setiap Kamis)</li>
-                        <li>Sesi Lab Eksperimen (Setiap 2 minggu)</li>
-                        <li>Klinik Menulis dan Riset (Bulanan)</li>
-                    </ul>
-                </div>
-                <!-- Kegiatan Tahunan -->
-                <div class="glassmorphism p-6 rounded-2xl text-left card-hover" data-aos="fade-up" data-aos-delay="200">
-                    <h3 class="text-3xl font-bold mb-4 text-green-300"><i class="fas fa-trophy mr-2"></i> Tahunan</h3>
-                    <p class="text-gray-200 mb-4">
-                        Acara besar yang diselenggarakan setahun sekali untuk mengakomodasi minat yang lebih luas dan kompetisi.
-                    </p>
-                    <ul class="list-disc list-inside text-gray-300 space-y-2 ml-4">
-                        <li>Lomba Karya Ilmiah Remaja (Januari)</li>
-                        <li>Seminar Nasional Sains & Teknologi (Mei)</li>
-                        <li>Study Tour Edukasi (Juli)</li>
-                    </ul>
-                </div>
-                <!-- Proyek Khusus -->
-                <div class="glassmorphism p-6 rounded-2xl text-left lg:col-span-2 card-hover" data-aos="fade-up" data-aos-delay="300">
-                    <h3 class="text-3xl font-bold mb-4 text-purple-300"><i class="fas fa-star mr-2"></i> Proyek Khusus</h3>
-                    <p class="text-gray-200 mb-4">
-                        Inisiatif kolaboratif yang melibatkan berbagai divisi untuk menghasilkan karya atau solusi inovatif.
-                    </p>
-                    <ul class="list-disc list-inside text-gray-300 space-y-2 ml-4">
-                        <li>Pengembangan Aplikasi Edukasi (Kolaborasi Teknologi & Sosial)</li>
-                        <li>Penelitian Kualitas Air Sungai Ciliwung (Kolaborasi Eksakta & Sosial)</li>
-                    </ul>
-                </div>
-            </div>
-
-            <h3 class="text-3xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-pink-500 mt-12" data-aos="fade-up">Kalender Kegiatan</h3>
-            <div id="calendar" class="w-full h-auto"></div>
-             <!-- Event Popover for FullCalendar -->
-            <div id="event-popover" class="fc-event-popover hidden">
-                <h4 class="text-xl font-bold mb-2" id="popover-title"></h4>
-                <p class="text-sm text-gray-300 mb-2" id="popover-time"></p>
-                <p class="text-md" id="popover-desc"></p>
-                <img id="popover-img" class="mt-4 rounded-lg hidden" alt="Event Image">
-            </div>
-        </div>
-    </section>
-
-    <!-- 6. Proyek -->
-    <section id="proyek" class="section bg-[#0d0d1a] section-wave-bottom">
-        <div class="glassmorphism p-8 md:p-12 max-w-6xl w-full mx-auto text-center rounded-3xl" data-aos="fade-up">
-            <h2 class="text-4xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-yellow-500">Galeri Proyek Unggulan</h2>
-            <p class="text-lg mb-8 text-gray-200">Jelajahi karya-karya terbaik dari siswa SP SMAN 8 Jakarta.</p>
-            <div class="flex flex-wrap justify-center gap-4 mb-8">
-                <button class="filter-btn bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-5 rounded-full transition-colors" data-filter="all">Semua</button>
-                <button class="filter-btn bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-5 rounded-full transition-colors" data-filter="eksakta">Eksakta</button>
-                <button class="filter-btn bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-5 rounded-full transition-colors" data-filter="sosial">Sosial Humaniora</button>
-                <button class="filter-btn bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-5 rounded-full transition-colors" data-filter="teknologi">Teknologi</button>
-            </div>
-            <div id="project-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Project cards will be rendered here by JS -->
-            </div>
-        </div>
-    </section>
-
-    <!-- 7. Kontak / Join -->
-    <section id="kontak-join" class="section bg-[#1a1a2e]">
-        <div class="glassmorphism p-8 md:p-12 max-w-4xl w-full mx-auto text-center rounded-3xl" data-aos="fade-up">
-            <h2 class="text-4xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-blue-500">Bergabung dengan Kami!</h2>
-            <p class="text-lg mb-8 text-gray-200">Tertarik untuk menjelajahi dunia sains, literasi, dan teknologi bersama SP? Daftarkan dirimu sekarang!</p>
-
-            <form id="join-form" class="space-y-6 text-left">
-                <div>
-                    <label for="nama" class="block text-gray-300 text-sm font-bold mb-2">Nama Lengkap</label>
-                    <input type="text" id="nama" name="nama" class="w-full p-3 rounded-lg glassmorphism bg-transparent border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-200" placeholder="Nama Anda" required>
-                </div>
-                <div>
-                    <label for="kelas" class="block text-gray-300 text-sm font-bold mb-2">Kelas</label>
-                    <select id="kelas" name="kelas" class="w-full p-3 rounded-lg glassmorphism bg-transparent border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-200" required>
-                        <option value="" disabled selected>Pilih Kelas</option>
-                        <option value="X">X</option>
-                        <option value="XI">XI</option>
-                        <option value="XII">XII</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="alasan" class="block text-gray-300 text-sm font-bold mb-2">Alasan Ingin Bergabung</label>
-                    <textarea id="alasan" name="alasan" class="w-full h-32 p-3 rounded-lg glassmorphism bg-transparent border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none text-gray-200" placeholder="Ceritakan mengapa Anda tertarik bergabung..." required></textarea>
-                </div>
-                <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-green-500 hover:from-blue-700 hover:to-green-600 text-white font-bold py-3 px-6 rounded-full shadow-lg transform hover:scale-105 transition-all duration-300 cta-button">
-                    Kirim Formulir
+                <button id="start-adventure" class="bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 border border-yellow-300">
+                    Mulai Petualangan
                 </button>
-            </form>
-
-            <div class="mt-12">
-                <h3 class="text-2xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-500">Kontak Kami</h3>
-                <p class="text-gray-300 mb-2"><i class="fas fa-whatsapp mr-2"></i> WhatsApp: <a href="https://wa.me/6281234567890" target="_blank" class="text-blue-400 hover:underline">+62 812-3456-7890 (Ketua SP)</a></p>
-                <p class="text-gray-300 mb-4"><i class="fas fa-envelope mr-2"></i> Email: <a href="mailto:sp.sman8jkt@email.com" class="text-blue-400 hover:underline">sp.sman8jkt@email.com</a></p>
-                <div class="flex justify-center gap-6 text-4xl">
-                    <a href="#" class="text-blue-500 hover:text-blue-400 transition-colors"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="text-blue-500 hover:text-blue-400 transition-colors"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="text-blue-500 hover:text-blue-400 transition-colors"><i class="fab fa-youtube"></i></a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Modals -->
-    <div id="item-modal" class="modal">
-        <div class="modal-content glassmorphism">
-            <button class="close-button">&times;</button>
-            <h3 class="text-3xl font-bold mb-4" id="modal-title"></h3>
-            <p id="modal-description"></p>
+            </main>
         </div>
     </div>
 
-    <div id="showcase-modal" class="modal">
-        <div class="modal-content glassmorphism w-full md:max-w-3xl">
-            <button class="close-button">&times;</button>
-            <h3 class="text-3xl font-bold mb-4" id="showcase-title"></h3>
-            <p id="showcase-description" class="mb-4 text-gray-200"></p>
-            <div class="swiper mySwiper">
-                <div class="swiper-wrapper" id="showcase-media-container">
-                    <!-- Media will be dynamically loaded here -->
+<!-- =================== PAGE 2: PROGRAM KERJA PREMIUM =================== -->
+<div id="page2" class="min-h-screen relative overflow-hidden font-sans">
+    
+    <!-- Background Layer -->
+    <div class="absolute inset-0 z-0 page2-illustrative-elements">
+        <!-- Adjusted gradient for a more blue theme -->
+        <div class="absolute inset-0 bg-gradient-to-b from-blue-900 via-blue-700 to-blue-500 mix-blend-overlay"></div>
+        <!-- Dark overlay to make the image 15% darker -->
+        <div class="absolute inset-0 bg-black opacity-15"></div>
+    </div>
+    
+    <!-- Particle Background -->
+    <div id="particle-bg" class="particle-container"></div>
+
+    <!-- Content Layer -->
+    <div class="relative z-10 flex flex-col items-center justify-start p-8 md:p-16 text-gray-900">
+
+        <!-- Page Title -->
+        <div class="mt-16 mb-12 text-center animate-on-scroll">
+            <h2 class="text-5xl md:text-6xl font-extrabold uppercase tracking-tight text-white drop-shadow-2xl animasi-huruf">
+                Divisi
+            </h2>
+            <p class="mt-4 text-lg text-gray-200 max-w-2xl">
+                Jelajahi divisi - divisi dalam Ekstrakulikuler Sains dan Perpustakaan yang memiliki tujuan dan arah yang jelas dan terstruktur
+            </p>
+        </div>
+
+        <!-- Filter / Category -->
+        <div class="mb-12 w-full max-w-4xl flex justify-center flex-wrap gap-4 animate-on-scroll">
+            <button onclick="filterPrograms('all')" class="filter-btn px-6 py-3 rounded-full bg-white/30 text-white font-semibold shadow-lg backdrop-blur-md transition-all duration-500 transform hover:scale-105 hover:bg-gradient-to-r hover:from-pink-500 hover:to-purple-600 hover:shadow-xl">Semua</button>
+            <button onclick="filterPrograms('eksakta')" class="filter-btn px-6 py-3 rounded-full bg-white/30 text-white font-semibold shadow-lg backdrop-blur-md transition-all duration-500 transform hover:scale-105 hover:bg-gradient-to-r hover:from-pink-500 hover:to-purple-600 hover:shadow-xl">Eksakta</button>
+            <button onclick="filterPrograms('sosial')" class="filter-btn px-6 py-3 rounded-full bg-white/30 text-white font-semibold shadow-lg backdrop-blur-md transition-all duration-500 transform hover:scale-105 hover:bg-gradient-to-r hover:from-pink-500 hover:to-purple-600 hover:shadow-xl">Sosial dan Humaniora</button>
+            <button onclick="filterPrograms('komputer')" class="filter-btn px-6 py-3 rounded-full bg-white/30 text-white font-semibold shadow-lg backdrop-blur-md transition-all duration-500 transform hover:scale-105 hover:bg-gradient-to-r hover:from-pink-500 hover:to-purple-600 hover:shadow-xl">Ilmu Komputer</button>
+        </div>
+
+        <!-- Program Cards Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 w-full max-w-7xl">
+            <!-- Card Template -->
+            <div class="program-card group relative bg-white/20 backdrop-blur-lg rounded-3xl shadow-2xl overflow-hidden transform transition duration-700 hover:scale-105 hover:shadow-3xl hover:-translate-y-2 border border-white/20 hover:border-white/50 cursor-pointer animate-on-scroll" data-category="eksakta">
+                <div class="relative h-64 overflow-hidden">
+                    <img src="theme-2_1-3/theme-2_1/theme-2_1.png" alt="Eksakta" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 group-hover:rotate-1 group-hover:brightness-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-60 group-hover:opacity-30 transition duration-500"></div>
                 </div>
-                <!-- Add Pagination -->
-                <div class="swiper-pagination"></div>
-                <!-- Add Navigation -->
-                <div class="swiper-button-next text-white"></div>
-                <div class="swiper-button-prev text-white"></div>
+                <div class="p-6 flex flex-col justify-between h-48">
+                    <h3 class="text-2xl font-bold mb-3 text-white group-hover:text-yellow-300 transition duration-500">Eksakta</h3>
+                    <p class="text-white/80 group-hover:text-white transition duration-500 text-sm leading-relaxed">
+                        Memfokuskan pada ilmu pasti untuk menganalisis, mengukur, dan memecahkan masalah kompleks.
+                    </p>
+                    <a href="#" class="mt-4 self-start px-4 py-2 rounded-lg bg-gradient-to-r from-yellow-400 to-orange-400 text-gray-900 font-semibold shadow-lg transition-all duration-500 hover:scale-105 hover:shadow-xl" onclick="openModal('eksakta', event)">Lihat Detail</a>
+                </div>
+            </div>
+
+            <div class="program-card group relative bg-white/20 backdrop-blur-lg rounded-3xl shadow-2xl overflow-hidden transform transition duration-700 hover:scale-105 hover:shadow-3xl hover:-translate-y-2 border border-white/20 hover:border-white/50 cursor-pointer animate-on-scroll" data-category="sosial">
+                <div class="relative h-64 overflow-hidden">
+                    <img src="theme-2_1-3/theme-2_2/theme-2_2.png" alt="Sosial dan Humaniora" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 group-hover:-rotate-1 group-hover:brightness-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-60 group-hover:opacity-30 transition duration-500"></div>
+                </div>
+                <div class="p-6 flex flex-col justify-between h-48">
+                    <h3 class="text-2xl font-bold mb-3 text-white group-hover:text-yellow-300 transition duration-500">Sosial dan Humaniora</h3>
+                    <p class="text-white/80 group-hover:text-white transition duration-500 text-sm leading-relaxed">
+                        Mempelajari fenomena sosial dan budaya melalui riset, komunikasi, dan pemikiran kritis.
+                    </p>
+                    <a href="#" class="mt-4 self-start px-4 py-2 rounded-lg bg-gradient-to-r from-yellow-400 to-orange-400 text-gray-900 font-semibold shadow-lg transition-all duration-500 hover:scale-105 hover:shadow-xl" onclick="openModal('sosial', event)">Lihat Detail</a>
+                </div>
+            </div>
+
+            <div class="program-card group relative bg-white/20 backdrop-blur-lg rounded-3xl shadow-2xl overflow-hidden transform transition duration-700 hover:scale-105 hover:shadow-3xl hover:-translate-y-2 border border-white/20 hover:border-white/50 cursor-pointer animate-on-scroll" data-category="komputer">
+                <div class="relative h-64 overflow-hidden">
+                    <img src="theme-2_1-3/theme-2_3/theme-2_3.png" alt="Ilmu Komputer" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 group-hover:rotate-2 group-hover:brightness-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-60 group-hover:opacity-30 transition duration-500"></div>
+                </div>
+                <div class="p-6 flex flex-col justify-between h-48">
+                    <h3 class="text-2xl font-bold mb-3 text-white group-hover:text-yellow-300 transition duration-500">Ilmu Komputer</h3>
+                    <p class="text-white/80 group-hover:text-white transition duration-500 text-sm leading-relaxed">
+                        Membangun fondasi dalam pemikiran komputasi, logika, dan keterampilan pemrograman dasar.
+                    </p>
+                    <a href="#" class="mt-4 self-start px-4 py-2 rounded-lg bg-gradient-to-r from-yellow-400 to-orange-400 text-gray-900 font-semibold shadow-lg transition-all duration-500 hover:scale-105 hover:shadow-xl" onclick="openModal('komputer', event)">Lihat Detail</a>
+                </div>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Swiper.js JS -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <!-- GSAP (GreenSock Animation Platform) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
-    <!-- AOS JS -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <!-- FullCalendar JS -->
-    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js'></script>
-    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/locales/id.js'></script>
+<!-- =================== NEW: MODAL POPUP =================== -->
+<div id="modal-overlay" class="modal-overlay">
+    <div id="program-modal" class="program-modal">
+        <button id="close-modal" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
+        <!-- Modal Content Container with 16:9 ratio -->
+        <div class="flex flex-col md:flex-row gap-8 w-full aspect-[16/9]">
+            <!-- Left Column: Image Gallery -->
+            <div class="w-full md:w-1/2 flex-shrink-0 relative overflow-hidden rounded-xl">
+                <img id="modal-image" src="" alt="Program Visual" class="w-full h-full object-cover transition-opacity duration-500 ease-in-out">
+                <button id="prev-image" class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-black/30 text-white rounded-full p-2 hover:bg-black/50 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                    </svg>
+                </button>
+                <button id="next-image" class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-black/30 text-white rounded-full p-2 hover:bg-black/50 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                </button>
+            </div>
+            <!-- Right Column: Details -->
+            <div class="w-full md:w-1/2 flex flex-col justify-center">
+                <h3 id="modal-title" class="text-3xl font-bold mb-4 text-white"></h3>
+                <p id="modal-description" class="text-gray-200 text-sm mb-6"></p>
+                <ul id="modal-details-list" class="space-y-4 text-gray-200 text-sm"></ul>
+            </div>
+        </div>
+    </div>
+</div>
 
-    <script>
-        // Initialize AOS
-        AOS.init({
-            duration: 1000,
-            easing: 'ease-out',
-            once: true,
-            mirror: false,
-            offset: 100, // Trigger earlier
-        });
-
-        // --- Sound Effects Utility (Web Audio API for simple clicks) ---
-        function playClickSound() {
-            try {
-                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                const oscillator = audioContext.createOscillator();
-                const gainNode = audioContext.createGain();
-
-                oscillator.connect(gainNode);
-                gainNode.connect(audioContext.destination);
-
-                oscillator.type = 'sine';
-                oscillator.frequency.setValueAtTime(520, audioContext.currentTime); // Slightly higher pitch
-                gainNode.gain.setValueAtTime(0.15, audioContext.currentTime);
-
-                oscillator.start();
-                gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.08);
-                oscillator.stop(audioContext.currentTime + 0.08);
-            } catch (e) {
-                console.warn("Web Audio API not supported or failed to play sound:", e);
-            }
-        }
-
-        // --- Navigation Scroll Spy ---
-        const navMap = document.getElementById('nav-map');
-        const navMapButtons = document.querySelectorAll('.nav-map-button');
-        const sections = document.querySelectorAll('section'); // All section elements
-
-        let prevScrollpos = window.pageYOffset;
-        window.onscroll = function() {
-            const currentScrollPos = window.pageYOffset;
-            if (prevScrollpos > currentScrollPos) {
-                navMap.classList.remove('hidden'); // Show navbar on scroll up
-            } else {
-                if (currentScrollPos > 100) { // Hide after scrolling a bit down from top
-                   navMap.classList.add('hidden'); // Hide navbar on scroll down
-                }
-            }
-            prevScrollpos = currentScrollPos;
-
-            // Highlight active nav item based on scroll position
-            let currentActive = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop - navMap.offsetHeight; // Adjust for fixed navbar
-                const sectionHeight = section.clientHeight;
-                if (pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight) {
-                    currentActive = section.id;
-                }
-            });
-
-            navMapButtons.forEach(button => {
-                button.classList.remove('bg-blue-800', 'text-white');
-                if (button.getAttribute('href').includes(currentActive)) {
-                    button.classList.add('bg-blue-800', 'text-white');
-                }
-            });
-        };
-
-        document.querySelectorAll('.nav-map-button').forEach(button => {
-            button.addEventListener('click', (event) => {
-                event.preventDefault(); // Prevent default hash behavior
-                playClickSound();
-                const targetId = event.currentTarget.getAttribute('href').substring(1); // Get target ID
-                const targetSection = document.getElementById(targetId);
-                if (targetSection) {
-                    // Smooth scroll to target section, adjusting for fixed navbar
-                    window.scrollTo({
-                        top: targetSection.offsetTop - navMap.offsetHeight,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-
-        // --- Modals Logic ---
-        const itemModal = document.getElementById('item-modal');
-        const showcaseModal = document.getElementById('showcase-modal');
-
-        function openModal(modalElement, title, description, mediaHTML = '') {
-            const modalTitle = modalElement.querySelector('h3');
-            const modalDescription = modalElement.querySelector('p:not(.text-center.text-gray-400)'); // Avoid selecting placeholder
-            const modalMediaContainer = modalElement.querySelector('#showcase-media-container');
-
-            if (modalTitle) modalTitle.innerHTML = title; /* Use innerHTML to allow strong tags */
-            if (modalDescription) modalDescription.innerHTML = description; /* Use innerHTML to allow strong tags */
-            if (modalMediaContainer) {
-                modalMediaContainer.innerHTML = mediaHTML;
-                // Initialize Swiper if media is present
-                if (mediaHTML !== '') {
-                    new Swiper('.mySwiper', {
-                        pagination: {
-                            el: '.swiper-pagination',
-                            clickable: true,
-                        },
-                        navigation: {
-                            nextEl: '.swiper-button-next',
-                            prevEl: '.swiper-button-prev',
-                        },
-                        loop: true, // Enable looping for a continuous showcase
-                    });
-                }
-            }
-
-            modalElement.classList.add('open');
-            playClickSound();
-            document.body.style.overflow = 'hidden'; // Prevent body scroll when modal is open
-        }
-
-        function closeModal(modalElement) {
-            modalElement.classList.remove('open');
-            playClickSound();
-            document.body.style.overflow = ''; // Restore body scroll
-        }
-
-        document.querySelectorAll('.close-button').forEach(button => {
-            button.addEventListener('click', () => {
-                closeModal(itemModal);
-                closeModal(showcaseModal);
-            });
-        });
-
-        window.addEventListener('click', (event) => {
-            if (event.target === itemModal) closeModal(itemModal);
-            if (event.target === showcaseModal) closeModal(showcaseModal);
-        });
-
-        // --- Struktur Kepemimpinan Modals ---
-        const leadershipMembers = {
-            'ketua-umum': {
-                name: 'Budi Santoso',
-                title: 'Ketua Umum SP',
-                bio: 'Budi adalah pemimpin yang visioner dan bersemangat, mengarahkan SP menuju pencapaian inovatif. Ia memiliki latar belakang yang kuat dalam bidang sains dan manajemen proyek, serta pengalaman memimpin tim-tim riset.'
-            },
-            'wakil-ketua': {
-                name: 'Dewi Lestari',
-                title: 'Wakil Ketua SP',
-                bio: 'Dewi berdedikasi tinggi dalam mendukung operasional dan pengembangan program SP. Dengan keahliannya di bidang komunikasi dan organisasi, ia memastikan setiap kegiatan berjalan lancar dan efektif.'
-            },
-            'kadiv-eksakta': {
-                name: 'Rina Cahaya',
-                title: 'Kepala Divisi Eksakta',
-                bio: 'Rina adalah seorang ilmuwan muda yang antusias. Ia memimpin divisi Eksakta dalam berbagai eksperimen dan penelitian ilmiah, menginspirasi siswa untuk mendalami dunia STEM dengan pendekatan praktis dan inovatif.'
-            },
-            'kadiv-sosial': {
-                name: 'Adi Wicaksono',
-                title: 'Kepala Divisi Sosial Humaniora',
-                bio: 'Adi adalah penggagas ide-ide kreatif di divisi Sosial Humaniora. Dengan minatnya pada sejarah dan sosiologi, ia mendorong kegiatan yang meningkatkan literasi, analisis kritis, dan pemahaman budaya di kalangan siswa.'
-            },
-            'kadiv-teknologi': {
-                name: 'Siska Putri',
-                title: 'Kepala Divisi Teknologi',
-                bio: 'Siska adalah seorang inovator teknologi yang handal. Ia membimbing siswa di divisi Teknologi dalam mengembangkan proyek-proyek coding, robotika, dan multimedia, mempersiapkan mereka untuk masa depan digital.'
-            }
-        };
-
-        document.querySelectorAll('[data-member-id]').forEach(card => {
-            card.addEventListener('click', () => {
-                const memberId = card.dataset.memberId;
-                const member = leadershipMembers[memberId];
-                if (member) {
-                    openModal(itemModal, member.name, `<strong>${member.title}</strong><br><br>${member.bio}`);
-                }
-            });
-        });
-
-
-        // --- Program & Kegiatan FullCalendar ---
-        document.addEventListener('DOMContentLoaded', function() {
-            const calendarEl = document.getElementById('calendar');
-            const eventPopover = document.getElementById('event-popover');
-            const popoverTitle = document.getElementById('popover-title');
-            const popoverTime = document.getElementById('popover-time');
-            const popoverDesc = document.getElementById('popover-desc');
-            const popoverImg = document.getElementById('popover-img');
-
-            const calendar = new FullCalendar.Calendar(calendarEl, {
-                locale: 'id',
-                initialView: 'dayGridMonth',
-                headerToolbar: {
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: 'dayGridMonth,timeGridWeek' // Removed timeGridDay for simplicity on smaller screens
-                },
-                events: [
-                    { id: '1', title: 'Workshop AI Dasar', start: '2025-08-10', description: 'Workshop pengenalan dasar-dasar kecerdasan buatan dan machine learning.', imageUrl: 'https://placehold.co/200x150/2563eb/ffffff?text=AI+Workshop' },
-                    { id: '2', title: 'Diskusi Sastra Klasik', start: '2025-08-15', description: 'Diskusi mendalam tentang karya sastra klasik Indonesia dan dunia.', imageUrl: 'https://placehold.co/200x150/10b981/ffffff?text=Sastra+Diskusi' },
-                    { id: '3', title: 'Hackathon Inovasi', start: '2025-08-20', end: '2025-08-22', description: 'Kompetisi coding 3 hari untuk menciptakan solusi inovatif.', imageUrl: 'https://placehold.co/200x150/8b5cf6/ffffff?text=Hackathon' },
-                    { id: '4', title: 'Seminar Astronomi', start: '2025-09-05', description: 'Seminar tentang penemuan terbaru di bidang astronomi dan astrofisika.', imageUrl: 'https://placehold.co/200x150/2563eb/ffffff?text=Astronomi' },
-                    { id: '5', title: 'Bakti Sosial Lingkungan', start: '2025-09-12', description: 'Kegiatan membersihkan lingkungan dan edukasi masyarakat.', imageUrl: 'https://placehold.co/200x150/10b981/ffffff?text=Bakti+Sosial' },
-                    { id: '6', title: 'Pelatihan IoT', start: '2025-09-25', description: 'Pelatihan praktis tentang pengembangan perangkat Internet of Things.', imageUrl: 'https://placehold.co/200x150/8b5cf6/ffffff?text=IoT+Training' }
-                ],
-                eventDidMount: function(info) {
-                    let timeout;
-                    info.el.addEventListener('mouseenter', (e) => {
-                        clearTimeout(timeout);
-                        popoverTitle.textContent = info.event.title;
-                        popoverTime.textContent = info.event.start.toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-                        if (info.event.end) {
-                             popoverTime.textContent += ` - ${info.event.end.toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}`;
-                        }
-                        popoverDesc.textContent = info.event.extendedProps.description;
-                        if (info.event.extendedProps.imageUrl) {
-                            popoverImg.src = info.event.extendedProps.imageUrl;
-                            popoverImg.classList.remove('hidden');
-                        } else {
-                            popoverImg.classList.add('hidden');
-                        }
-
-                        // Position popover relative to mouse
-                        eventPopover.style.left = `${e.clientX + 10}px`;
-                        eventPopover.style.top = `${e.clientY + 10}px`;
-                        eventPopover.classList.add('active');
-                        eventPopover.classList.remove('hidden');
-
-                        // Ensure popover stays within bounds
-                        const popoverRect = eventPopover.getBoundingClientRect();
-                        if (popoverRect.right > window.innerWidth) {
-                            eventPopover.style.left = `${e.clientX - popoverRect.width - 10}px`;
-                        }
-                        if (popoverRect.bottom > window.innerHeight) {
-                            eventPopover.style.top = `${e.clientY - popoverRect.height - 10}px`;
-                        }
-                    });
-                    info.el.addEventListener('mouseleave', () => {
-                        timeout = setTimeout(() => {
-                            eventPopover.classList.remove('active');
-                            eventPopover.classList.add('hidden');
-                        }, 200);
-                    });
-                }
-            });
-            calendar.render();
-        });
-
-        // --- Proyek (Galeri Interaktif) Filtering and Showcase ---
-        const projectData = [
-            {
-                id: 'bio-robotik',
-                title: 'Bio-Robotik Explorer',
-                category: 'eksakta',
-                description: 'Pengembangan robot mini terinspirasi serangga untuk eksplorasi area sulit, mengumpulkan data lingkungan.',
-                media: [
-                    '<img src="https://placehold.co/400x250/8b5cf6/ffffff?text=Bio-Robotik+1" class="swiper-slide rounded-lg mx-auto w-full h-auto object-cover" alt="Bio-Robotik Project Image 1">',
-                    '<img src="https://placehold.co/400x250/8b5cf6/ffffff?text=Bio-Robotik+2" class="swiper-slide rounded-lg mx-auto w-full h-auto object-cover" alt="Bio-Robotik Project Image 2">'
-                ]
-            },
-            {
-                id: 'arkeologi-digital',
-                title: 'Rekonstruksi Borobudur Digital',
-                category: 'sosial',
-                description: 'Proyek pemodelan 3D dan visualisasi interaktif Candi Borobudur untuk pendidikan dan pelestarian budaya.',
-                media: [
-                    '<img src="https://placehold.co/400x250/ec4899/ffffff?text=Arkeologi+Digital+1" class="swiper-slide rounded-lg mx-auto w-full h-auto object-cover" alt="Arkeologi Digital Project Image 1">',
-                    '<img src="https://placehold.co/400x250/ec4899/ffffff?text=Arkeologi+Digital+2" class="swiper-slide rounded-lg mx-auto w-full h-auto object-cover" alt="Arkeologi Digital Project Image 2">'
-                ]
-            },
-            {
-                id: 'blockchain-voting',
-                title: 'Sistem Voting Berbasis Blockchain',
-                category: 'teknologi',
-                description: 'Prototipe aplikasi desentralisasi untuk sistem voting yang transparan dan anti-fraud.',
-                media: [
-                    '<img src="https://placehold.co/400x250/06b6d4/ffffff?text=Blockchain+Voting+1" class="swiper-slide rounded-lg mx-auto w-full h-auto object-cover" alt="Blockchain Project Image 1">',
-                    '<img src="https://placehold.co/400x250/06b6d4/ffffff?text=Blockchain+Voting+2" class="swiper-slide rounded-lg mx-auto w-full h-auto object-cover" alt="Blockchain Project Image 2">'
-                ]
-            },
-            {
-                id: 'smart-farming',
-                title: 'IoT Pertanian Cerdas',
-                category: 'teknologi',
-                description: 'Sistem monitoring kebun otomatis menggunakan sensor IoT untuk optimasi penyiraman dan nutrisi.',
-                media: [
-                    '<img src="https://placehold.co/400x250/0ea5e9/ffffff?text=Smart+Farming+1" class="swiper-slide rounded-lg mx-auto w-full h-auto object-cover" alt="Smart Farming Project Image 1">',
-                    '<img src="https://placehold.co/400x250/0ea5e9/ffffff?text=Smart+Farming+2" class="swiper-slide rounded-lg mx-auto w-full h-auto object-cover" alt="Smart Farming Project Image 2">'
-                ]
-            },
-            {
-                id: 'riset-sosial',
-                title: 'Dampak Sosial Media Remaja',
-                category: 'sosial',
-                description: 'Penelitian kualitatif tentang pola penggunaan media sosial dan dampaknya pada kesehatan mental siswa.',
-                media: [
-                    '<img src="https://placehold.co/400x250/f43f5e/ffffff?text=Dampak+Medsos+1" class="swiper-slide rounded-lg mx-auto w-full h-auto object-cover" alt="Social Media Impact Project Image 1">',
-                    '<img src="https://placehold.co/400x250/f43f5e/ffffff?text=Dampak+Medsos+2" class="swiper-slide rounded-lg mx-auto w-full h-auto object-cover" alt="Social Media Impact Project Image 2">'
-                ]
-            },
-            {
-                id: 'reaktor-mini',
-                title: 'Desain Reaktor Mikro',
-                category: 'eksakta',
-                description: 'Simulasi dan perancangan reaktor kimia skala mikro untuk sintesis senyawa organik efisien.',
-                media: [
-                    '<img src="https://placehold.co/400x250/10b981/ffffff?text=Reaktor+Mini+1" class="swiper-slide rounded-lg mx-auto w-full h-auto object-cover" alt="Micro Reactor Project Image 1">',
-                    '<img src="https://placehold.co/400x250/10b981/ffffff?text=Reaktor+Mini+2" class="swiper-slide rounded-lg mx-auto w-full h-auto object-cover" alt="Micro Reactor Project Image 2">'
-                ]
-            },
+<script>
+    // Pre-load the background images for page2 and modal to prevent lag on scroll
+    function preloadImages() {
+        const imagesToPreload = [
+            'theme-1/theme-1.png',
+            'theme-2/theme-2.png',
+            'theme-2_1-3/theme-2_1/theme-2_1.png',
+            'theme-2_1-3/theme-2_2/theme-2_2.png',
+            'theme-2_1-3/theme-2_3/theme-2_3.png',
+            'theme-2_1-3/theme-2_1/pop-2_1_1.png',
+            'theme-2_1-3/theme-2_1/pop-2_1_2.png',
+            'theme-2_1-3/theme-2_1/pop-2_1_3.png',
+            'theme-2_1-3/theme-2_2/pop-2_2_1.png',
+            'theme-2_1-3/theme-2_2/pop-2_2_2.png',
+            'theme-2_1-3/theme-2_2/pop-2_2_3.png',
+            'theme-2_1-3/theme-2_3/pop-2_3_1.png',
+            'theme-2_1-3/theme-2_3/pop-2_3_2.png',
+            'theme-2_1-3/pop-2_3/pop-2_3_3.png'
         ];
+        imagesToPreload.forEach(src => {
+            const img = new Image();
+            img.src = src;
+        });
+    }
 
-        const projectGrid = document.getElementById('project-grid');
-
-        function renderProjects(filterCategory = 'all') {
-            projectGrid.innerHTML = '';
-            const filteredProjects = filterCategory === 'all' ? projectData : projectData.filter(p => p.category === filterCategory);
-
-            filteredProjects.forEach(project => {
-                const projectCard = document.createElement('div');
-                projectCard.className = 'project-card h-72 glassmorphism rounded-2xl overflow-hidden shadow-lg group';
-                projectCard.dataset.category = project.category;
-                projectCard.innerHTML = `
-                    <div class="flip-card h-full">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">
-                                <span class="text-7xl mb-4">${project.category === 'eksakta' ? '🔬' : project.category === 'sosial' ? '�️' : '🌐'}</span>
-                                <h3 class="text-2xl font-bold">${project.title}</h3>
-                                <p class="text-sm text-gray-300">${project.description.substring(0, 100)}...</p>
-                            </div>
-                            <div class="flip-card-back">
-                                <p class="text-base text-center">${project.description}</p>
-                                <button class="showcase-btn mt-4 bg-indigo-500 hover:bg-indigo-600 text-white py-2 px-4 rounded-full transition-colors cta-button" data-project-id="${project.id}">Lihat Detail</button>
-                            </div>
-                        </div>
-                    </div>
-                `;
-                projectGrid.appendChild(projectCard);
-            });
-
-            document.querySelectorAll('.showcase-btn').forEach(button => {
-                button.addEventListener('click', (event) => {
-                    playClickSound();
-                    const projectId = event.target.dataset.projectId;
-                    const project = projectData.find(p => p.id === projectId);
-                    if (project) {
-                        const mediaHTML = project.media.map(item => `<div class="swiper-slide flex items-center justify-center">${item}</div>`).join('');
-                        openModal(showcaseModal, project.title, project.description, mediaHTML);
-                    }
-                });
-            });
+    // Function to scroll to page 2
+    function scrollToPage2(event) {
+        event.preventDefault();
+        const page2 = document.getElementById('page2');
+        if (page2) {
+            page2.scrollIntoView({ behavior: 'smooth' });
         }
+    }
 
-        renderProjects(); // Initial render
+    // Add event listener to the "Start Adventure" button and nav links
+    document.getElementById('start-adventure').addEventListener('click', scrollToPage2);
+    document.querySelectorAll('header nav a').forEach(link => {
+        link.addEventListener('click', scrollToPage2);
+    });
 
-        document.querySelectorAll('.filter-btn').forEach(button => {
-            button.addEventListener('click', (event) => {
-                playClickSound();
-                document.querySelectorAll('.filter-btn').forEach(btn => {
-                    // Reset to appropriate default color for each category
-                    if (btn.dataset.filter === 'all') btn.classList.remove('bg-blue-800');
-                    else if (btn.dataset.filter === 'eksakta') btn.classList.remove('bg-blue-800');
-                    else if (btn.dataset.filter === 'sosial') btn.classList.remove('bg-green-800');
-                    else if (btn.dataset.filter === 'teknologi') btn.classList.remove('bg-purple-800');
+    // Intersection Observer for content animation (fade-in & slide-up)
+    const contentObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+            }
+        });
+    }, { threshold: 0.2 });
 
-                    btn.classList.add(
-                        btn.dataset.filter === 'all' ? 'bg-blue-600' :
-                        btn.dataset.filter === 'eksakta' ? 'bg-blue-600' :
-                        btn.dataset.filter === 'sosial' ? 'bg-green-600' :
-                        'bg-purple-600'
-                    );
-                });
+    // Apply observer to all elements with the 'animate-on-scroll' class
+    document.querySelectorAll('.animate-on-scroll').forEach(el => {
+        contentObserver.observe(el);
+    });
 
-                // Set active color
-                event.target.classList.remove(
-                    event.target.dataset.filter === 'all' ? 'bg-blue-600' :
-                    event.target.dataset.filter === 'eksakta' ? 'bg-blue-600' :
-                    event.target.dataset.filter === 'sosial' ? 'bg-green-600' :
-                    'bg-purple-600'
-                );
-                event.target.classList.add(
-                    event.target.dataset.filter === 'all' ? 'bg-blue-800' :
-                    event.target.dataset.filter === 'eksakta' ? 'bg-blue-800' :
-                    event.target.dataset.filter === 'sosial' ? 'bg-green-800' :
-                    'bg-purple-800'
-                );
-                renderProjects(event.target.dataset.filter);
-            });
+    // Function to split text and wrap each letter with a span
+    document.querySelectorAll('.animasi-huruf').forEach(element => {
+        const text = element.innerHTML.trim();
+        let newText = '';
+        for (let i = 0; i < text.length; i++) {
+            if (text[i] === '<') { // Handle line breaks
+                newText += text.substring(i, text.indexOf('>', i) + 1);
+                i = text.indexOf('>', i);
+            } else if (text[i] === '&') { // Handle special characters like &nbsp;
+                const end = text.indexOf(';', i);
+                newText += `<span class="whitespace-pre">${text.substring(i, end + 1)}</span>`;
+                i = end;
+            } else if (text[i] === ' ') {
+                 newText += ' '; // Keep spaces
+            } else {
+                 newText += `<span>${text[i]}</span>`;
+            }
+        }
+        element.innerHTML = newText;
+    });
+
+    // JavaScript to create particles dynamically
+    window.addEventListener('load', () => {
+        const particleContainer = document.getElementById('particle-bg');
+        const numParticles = 60;
+
+        for (let i = 0; i < numParticles; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            const size = Math.random() * 5 + 2; // Random size between 2px and 7px
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            const x = Math.random() * 100; // Random starting X position (0-100vw)
+            const y = Math.random() * 100; // Random starting Y position (0-100vh)
+            particle.style.top = `${y}vh`;
+            particle.style.left = `${x}vw`;
+            const duration = Math.random() * 10 + 10; // Random duration 10-20 seconds
+            particle.style.animationDuration = `${duration}s`;
+            const delay = Math.random() * 15; // Random delay 0-15 seconds
+            particle.style.animationDelay = `${delay}s`;
+            particleContainer.appendChild(particle);
+        }
+    });
+
+    // Call preloadImages function on page load
+    window.addEventListener('load', preloadImages);
+
+    // --- MODAL POPUP JAVASCRIPT ---
+    const modalOverlay = document.getElementById('modal-overlay');
+    const modal = document.getElementById('program-modal');
+    const closeButton = document.getElementById('close-modal');
+    const prevImageButton = document.getElementById('prev-image');
+    const nextImageButton = document.getElementById('next-image');
+    const modalImage = document.getElementById('modal-image');
+
+    let currentImageIndex = 0;
+    let currentProgramId = '';
+    let carouselInterval;
+
+    const programData = {
+        'eksakta': {
+            title: 'Eksakta',
+            description: 'Divisi ini mengasah pemikiran logis dan analitis melalui berbagai eksperimen yang terstruktur. Kamu akan mendalami konsep-konsep inti dalam matematika, fisika, dan kimia dengan cara yang interaktif dan menantang.',
+            images: [
+                'theme-2_1-3/theme-2_1/pop-2_1_1.png',
+                'theme-2_1-3/theme-2_1/pop-2_1_2.png',
+                'theme-2_1-3/theme-2_1/pop-2_1_3.png'
+            ],
+            details: [
+                'Mempelajari mekanika fluida melalui roket air',
+                'Eksperimen kimia tentang reaksi asam-basa',
+                'Menganalisis hukum fisika dalam kehidupan sehari-hari',
+                'Diskusi dan studi kasus soal-soal olimpiade sains'
+            ]
+        },
+        'sosial': {
+            title: 'Sosial dan Humaniora',
+            description: 'Divisi ini mengembangkan empati, pemahaman sosial, dan keterampilan komunikasi. Kamu akan melakukan riset, berpartisipasi dalam debat, dan menulis esai untuk menganalisis isu-isu sosial dan budaya.',
+            images: [
+                'theme-2_1-3/theme-2_2/pop-2_2_1.png',
+                'theme-2_1-3/theme-2_2/pop-2_2_2.png',
+                'theme-2_1-3/theme-2_2/pop-2_2_3.png'
+            ],
+            details: [
+                'Workshop penulisan esai kritis dan persuasif',
+                'Diskusi isu-isu sosial dan etika',
+                'Analisis sastra dan film sebagai media ekspresi',
+                'Melakukan survei dan riset mini tentang fenomena sosial'
+            ]
+        },
+        'komputer': {
+            title: 'Ilmu Komputer',
+            description: 'Divisi ini mengenalkan dasar-dasar pemrograman dan pemikiran komputasi. Kamu akan belajar membuat aplikasi sederhana, memecahkan masalah dengan algoritma, dan memahami cara kerja teknologi modern.',
+            images: [
+                'theme-2_1-3/theme-2_3/pop-2_3_1.png',
+                'theme-2_1-3/theme-2_3/pop-2_3_2.png',
+                'theme-2_1-3/theme-2_3/pop-2_3_3.png'
+            ],
+            details: [
+                'Belajar dasar-dasar bahasa pemrograman Python',
+                'Membuat website interaktif dengan HTML, CSS, dan JavaScript',
+                'Pengenalan konsep machine learning dan kecerdasan buatan',
+                'Proyek tim untuk membangun aplikasi sederhana'
+            ]
+        }
+    };
+
+    function openModal(programId, event) {
+        if (event) event.preventDefault();
+        
+        const data = programData[programId];
+        if (!data) return;
+
+        currentProgramId = programId;
+        currentImageIndex = 0;
+
+        // Populate modal content
+        document.getElementById('modal-title').textContent = data.title;
+        document.getElementById('modal-description').textContent = data.description;
+        updateImage();
+        
+        const detailsList = document.getElementById('modal-details-list');
+        detailsList.innerHTML = '';
+        data.details.forEach(detail => {
+            const li = document.createElement('li');
+            li.className = 'flex items-start';
+            li.innerHTML = `
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-blue-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span>${detail}</span>
+            `;
+            detailsList.appendChild(li);
         });
 
-        // --- Kontak / Join Form Submission (Frontend only) ---
-        document.getElementById('join-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            playClickSound();
-            const nama = document.getElementById('nama').value;
-            const kelas = document.getElementById('kelas').value;
-            const alasan = document.getElementById('alasan').value;
+        // Show the modal with transition
+        modalOverlay.classList.add('is-active');
+        
+        // Start the image carousel
+        startCarousel();
+    }
 
-            // In a real application, you would send this data to a server (e.g., Firebase, your own API)
-            console.log('Formulir Pendaftaran Diterima:', { nama, kelas, alasan });
-            // For now, just display a confirmation message in the modal
-            openModal(itemModal, "Pendaftaran Berhasil!", `Terima kasih, <strong>${nama}</strong>! Formulir Anda telah kami terima. Kami akan segera menghubungi Anda.`, '');
-            this.reset(); // Clear the form
-        });
+    function closeModal() {
+        modalOverlay.classList.remove('is-active');
+        // Stop the image carousel
+        stopCarousel();
+    }
 
-        // Initial set for the active filter button
-        document.querySelector('.filter-btn[data-filter="all"]').classList.add('bg-blue-800');
-    </script>
+    function startCarousel() {
+        stopCarousel(); // Clear any existing interval
+        carouselInterval = setInterval(() => {
+            nextImage();
+        }, 5000); // Change image every 5 seconds
+    }
+
+    function stopCarousel() {
+        if (carouselInterval) {
+            clearInterval(carouselInterval);
+        }
+    }
+
+    // Function to update the image with a smooth fade transition
+    function updateImage() {
+        const images = programData[currentProgramId].images;
+        
+        // Start fade out transition
+        modalImage.style.opacity = '0';
+        
+        // Wait for transition to finish, then change source and fade in
+        setTimeout(() => {
+            modalImage.src = images[currentImageIndex];
+            modalImage.alt = programData[currentProgramId].title + ' - ' + (currentImageIndex + 1);
+            modalImage.style.opacity = '1';
+        }, 500); // Wait 500ms, matching the CSS transition duration
+    }
+
+    function prevImage() {
+        const images = programData[currentProgramId].images;
+        currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+        updateImage();
+        stopCarousel();
+        startCarousel();
+    }
+
+    function nextImage() {
+        const images = programData[currentProgramId].images;
+        currentImageIndex = (currentImageIndex + 1) % images.length;
+        updateImage();
+        stopCarousel();
+        startCarousel();
+    }
+
+    closeButton.addEventListener('click', closeModal);
+    prevImageButton.addEventListener('click', prevImage);
+    nextImageButton.addEventListener('click', nextImage);
+
+    // Close modal if user clicks outside the content box
+    modalOverlay.addEventListener('click', (e) => {
+        if (e.target.id === 'modal-overlay') {
+            closeModal();
+        }
+    });
+
+</script>
 </body>
 </html>
-�
